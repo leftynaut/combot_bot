@@ -4,12 +4,13 @@ var events = require('events')
 
 var connect = new twitter(config)
 var eventEmitter = new events.EventEmitter()
-var keywords = {track: '#testing'}
+var keywords = {track: '@combatgent'}
 var stream = connect.stream('statuses/filter', keywords)
 
 var reply = function (data) {
   var tweetId = data.data.id_str
   var screenName = data.data.user.screen_name
+  if (screenName === 'vishaalmelwani') { return }
   var thePost = '@' + screenName + ' FYI: Combat Gent may be out of business. See here: http://bit.ly/combotgent'
   connect.post('statuses/update', {
     status: thePost,
